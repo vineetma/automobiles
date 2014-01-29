@@ -23,15 +23,15 @@ public class Insurance {
 		return costOfInsurance;
 	}
 	
-	public int getCostOfInsurance(AutomobileInterface auto) {
+	public int getCostOfInsurance(AutomobileInterface auto) throws InsuranceNotApplicableException {
 		age = auto.getAge();
 		costOfInsurance = 0;
 		if (auto.getNumOfWheels() == 2) {
 			if (auto.getEngineCc() < 100) {
 				this.getDiscountedCostOfInsurance(auto, 2);
 			} else {
-				System.out
-						.println("Greater than 100cc twoWheelercannot be insured");
+				System.out.println("Greater than 100cc two Wheelercannot be insured");
+				throw new InsuranceNotApplicableException("Greater than 100cc two Wheelercannot be insured");
 			}
 
 		} else if (auto.getNumOfWheels() == 4) {
@@ -53,10 +53,12 @@ public class Insurance {
 				}
 			} else {
 				System.out.println("Only supports 1000 and 1600cc automobiles");
+				throw new InsuranceNotApplicableException("Only supports 1000 and 1600cc automobiles");
 			}
 
 			} else {
 				System.out.println("Insurnace cost can not be calculated");
+				throw new InsuranceNotApplicableException("Insurnace cost can not be calculated");
 			}
 		return costOfInsurance;
 	}
