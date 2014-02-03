@@ -1,20 +1,21 @@
 package com.dkt.Automobile;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
 
-import com.dkt.RestaurantManagement.Restaurant;
-import com.sun.org.apache.bcel.internal.generic.NEWARRAY;
+
 
 public class Insurance {
 	protected int costOfInsurance;
 	protected int age;
 	protected float discount;
 	
-	protected ArrayList<Automobile> vehlist;
-	 public Insurance(Automobile lv){
-		this.vehlist =new ArrayList<Automobile>();
-				
+
+	protected ArrayList<Automobile> vehlist ;
+	public  Insurance(){
+		this.vehlist=new ArrayList<Automobile>();
+		
 	}
 
 	protected int getDiscountedCostOfInsurance(AutomobileInterface auto,
@@ -86,25 +87,29 @@ public class Insurance {
 		return costOfInsurance;
 	}
 
-	public void addvehicles(Automobile a) {
-		// created empty arraylist with an initial capacity 
-	
 
-		// add method to add vehicle numbers
+	public void addvehicle(Automobile a) {
+		
 		this.vehlist.add(a);
-		public Automobile printAllAutomobile(){
-			
-			ListIterator<Automobile> it1 =vehlist.listIterator()
-					while (it1.hasNext()) {
-						 Automobile t = it1.next();
-						
-							return t;
-					
-		}
-	
+
+		
+		
+		
+
 		
 	}
+public void printAllAutomobile(){
+	
 
+	ListIterator<Automobile> it1=vehlist.listIterator();
+	while(it1.hasNext()){
+		Automobile t=it1.next();
+	System.out.println("type:"+t.getClass().getName()+",engine:"+t.getEngineCc()+", age:"+t.getAge());
+	
+			
+				
+}
+	}
 	public int getpremiumabove1000cc(AutomobileInterface auto)    
 		{
 			int prem;
@@ -120,4 +125,22 @@ public class Insurance {
 			}
 			return getCostOfInsurance(auto);
 		}
+	public List<Automobile> getAutoOfEngineAndAge(int cc, int age){
+		List<Automobile> selList=new ArrayList<Automobile>();
+		
+		for(Automobile a:vehlist){
+			if(a.getEngineCc()==cc && a.getAge()>age){
+				selList.add(a);
+				
+			}
+			else {
+				
+			}
+			
+		}
+		return selList;
+		
+		
+		
+	}
 }
