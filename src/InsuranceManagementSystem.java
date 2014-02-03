@@ -18,6 +18,7 @@ public class InsuranceManagementSystem {
 
 		// TODO Auto-generated method stub
 		Insurance ins = new Insurance();
+		
 		Automobile auto1 = new Car(5, 200000, 1200);
 		ins.addvehicle(auto1);
 		 auto1 = new Bike(2,80000,100);
