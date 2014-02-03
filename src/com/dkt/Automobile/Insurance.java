@@ -1,13 +1,20 @@
 package com.dkt.Automobile;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
 
 public class Insurance {
 	protected int costOfInsurance;
 	protected int age;
 	protected float discount;
-	protected int lv;
-
+	
+	protected ArrayList<Automobile> vehlist ;
+	public  Insurance(){
+		this.vehlist=new ArrayList<Automobile>();
+		
+	}
 	protected int getDiscountedCostOfInsurance(AutomobileInterface auto,
 			int pcInsurance) {
 		costOfInsurance = auto.getPrice() * pcInsurance / 100;
@@ -77,31 +84,35 @@ public class Insurance {
 		return costOfInsurance;
 	}
 
-	public int addvehicles() {
-		// created empty arraylist with an initial capacity
-		ArrayList<Integer> vehlist = new ArrayList<Integer>(5);
+	public void addvehicle(Automobile a) {
+		
+		this.vehlist.add(a);
 
-		// add method to add vehicle numbers
-		vehlist.add(1);
-		vehlist.add(2);
-		vehlist.add(3);
-		vehlist.add(4);
-
-		// printing all elements in the list
-		for (Integer veh : vehlist) {
-			System.out.println("Vehicle registration :" + veh);
-		}
-		return addvehicles();
+		
+		
+		
+		
 	}
+public void printAllAutomobile(){
+	
 
+	ListIterator<Automobile> it1=vehlist.listIterator();
+	while(it1.hasNext()){
+		Automobile t=it1.next();
+	System.out.println("type:"+t.getClass().getName()+",engine:"+t.getEngineCc()+", age:"+t.getAge());
+	
+			
+				
+}
+	}
 	public int getpremiumabove1000cc(AutomobileInterface auto)    
 		{
 			int prem;
 			if(auto.getEngineCc()==1000)
 			{
 				//Premium formula
-				(prem = dateofpurchase*claimifany/total timeperiod of car);
-				System.out.println("Premium is :" +prem);
+		//		(prem = dateofpurchase*claimifany/total timeperiodofcar);
+		//		System.out.println("Premium is :" +prem);
 			}
 			else
 			{
@@ -109,4 +120,22 @@ public class Insurance {
 			}
 			return getCostOfInsurance(auto);
 		}
+	public List<Automobile> getAutoOfEngineAndAge(int cc, int age){
+		List<Automobile> selList=new ArrayList<Automobile>();
+		
+		for(Automobile a:vehlist){
+			if(a.getEngineCc()==cc && a.getAge()>age){
+				selList.add(a);
+				
+			}
+			else {
+				
+			}
+			
+		}
+		return selList;
+		
+		
+		
+	}
 }
