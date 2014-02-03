@@ -1,12 +1,21 @@
 package com.dkt.Automobile;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
+
+import com.dkt.RestaurantManagement.Restaurant;
+import com.sun.org.apache.bcel.internal.generic.NEWARRAY;
 
 public class Insurance {
 	protected int costOfInsurance;
 	protected int age;
 	protected float discount;
-	protected int lv;
+	
+	protected ArrayList<Automobile> vehlist;
+	 public Insurance(Automobile lv){
+		this.vehlist =new ArrayList<Automobile>();
+				
+	}
 
 	protected int getDiscountedCostOfInsurance(AutomobileInterface auto,
 			int pcInsurance) {
@@ -77,21 +86,23 @@ public class Insurance {
 		return costOfInsurance;
 	}
 
-	public int addvehicles() {
-		// created empty arraylist with an initial capacity
-		ArrayList<Integer> vehlist = new ArrayList<Integer>(5);
+	public void addvehicles(Automobile a) {
+		// created empty arraylist with an initial capacity 
+	
 
 		// add method to add vehicle numbers
-		vehlist.add(1);
-		vehlist.add(2);
-		vehlist.add(3);
-		vehlist.add(4);
-
-		// printing all elements in the list
-		for (Integer veh : vehlist) {
-			System.out.println("Vehicle registration :" + veh);
+		this.vehlist.add(a);
+		public Automobile printAllAutomobile(){
+			
+			ListIterator<Automobile> it1 =vehlist.listIterator()
+					while (it1.hasNext()) {
+						 Automobile t = it1.next();
+						
+							return t;
+					
 		}
-		return addvehicles();
+	
+		
 	}
 
 	public int getpremiumabove1000cc(AutomobileInterface auto)    
@@ -100,8 +111,8 @@ public class Insurance {
 			if(auto.getEngineCc()==1000)
 			{
 				//Premium formula
-				(prem = dateofpurchase*claimifany/total timeperiod of car);
-				System.out.println("Premium is :" +prem);
+		//		(prem = dateofpurchase*claimifany/total timeperiodofcar);
+		//		System.out.println("Premium is :" +prem);
 			}
 			else
 			{
