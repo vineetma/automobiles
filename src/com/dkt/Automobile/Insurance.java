@@ -1,40 +1,12 @@
 package com.dkt.Automobile;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
 
 public class Insurance {
 	protected int costOfInsurance;
 	protected int age;
 	protected float discount;
-	List<Automobile> registerVechile = new ArrayList<Automobile>();
-
-	public Automobile addvechile(Automobile regvehicle) {
-		registerVechile.add(regvehicle);
-		return regvehicle;
-
-	}
-
-	List<Insurance> insuredVechile = new ArrayList<Insurance>();
-
-	public Insurance getListOf1000CcInsuredVec(Insurance id1) {
-		List<Insurance> x = id1.insuredVechile();
-		ListIterator<Insurance> it1 = insuredVechile.listIterator();
-		while (it1.hasNext()) {
-			Insurance t = it1.next();
-			if (x.contains(t) == false) {
-				return t;
-			}
-		}
-		return null;
-
-	}
-
-	public List<Insurance> insuredVechile() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	protected int lv;
 
 	protected int getDiscountedCostOfInsurance(AutomobileInterface auto,
 			int pcInsurance) {
@@ -57,8 +29,7 @@ public class Insurance {
 		return costOfInsurance;
 	}
 
-	public int getCostOfInsurance(AutomobileInterface auto)
-			throws InsuranceNotApplicableException {
+	public int getCostOfInsurance(AutomobileInterface auto) {
 		age = auto.getAge();
 		costOfInsurance = 0;
 		if (auto.getNumOfWheels() == 2) {
@@ -66,9 +37,7 @@ public class Insurance {
 				this.getDiscountedCostOfInsurance(auto, 2);
 			} else {
 				System.out
-						.println("Greater than 100cc two Wheelercannot be insured");
-				throw new InsuranceNotApplicableException(
-						"Greater than 100cc two Wheelercannot be insured");
+						.println("Greater than 100cc twoWheelercannot be insured");
 			}
 
 		} else if (auto.getNumOfWheels() == 4) {
@@ -85,28 +54,59 @@ public class Insurance {
 				if (age < 2) {
 					this.getDiscountedCostOfInsurance(auto, 2);
 				}
+			
 				if (age > 2) {
 					this.getDiscountedCostOfInsurance(auto, 3);
-				}
-			} else if (auto.getEngineCc() == 1400) {
+				} 
+			}else if (auto.getEngineCc() == 1400) {
+
 				if (age < 2) {
 					this.getDiscountedCostOfInsurance(auto, 6);
 				}
 				if (age > 2) {
 					this.getDiscountedCostOfInsurance(auto, 5);
 				}
-			} else {
-				System.out
-						.println("Only supports 1000,1400 and 1600cc automobiles");
-				throw new InsuranceNotApplicableException(
-						"Only supports 1000,1400 and 1600cc automobiles");
+			}
+			else {
+				System.out.println("Only supports 1000,1400 and 1600cc,  automobiles");
 			}
 
 		} else {
 			System.out.println("Insurnace cost can not be calculated");
-			throw new InsuranceNotApplicableException(
-					"Insurnace cost can not be calculated");
 		}
 		return costOfInsurance;
 	}
+
+	public int addvehicles() {
+		// created empty arraylist with an initial capacity
+		ArrayList<Integer> vehlist = new ArrayList<Integer>(5);
+
+		// add method to add vehicle numbers
+		vehlist.add(1);
+		vehlist.add(2);
+		vehlist.add(3);
+		vehlist.add(4);
+
+		// printing all elements in the list
+		for (Integer veh : vehlist) {
+			System.out.println("Vehicle registration :" + veh);
+		}
+		return addvehicles();
+	}
+
+	public int getpremiumabove1000cc(AutomobileInterface auto)    
+		{
+			int prem;
+			if(auto.getEngineCc()==1000)
+			{
+				//Premium formula
+				(prem = dateofpurchase*claimifany/total timeperiod of car);
+				System.out.println("Premium is :" +prem);
+			}
+			else
+			{
+				System.out.println("Your Vehicle is not 1000 CC vehicle");
+			}
+			return getCostOfInsurance(auto);
+		}
 }
