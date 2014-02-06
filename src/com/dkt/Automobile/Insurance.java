@@ -5,16 +5,19 @@ import java.util.List;
 import java.util.ListIterator;
 
 
+
 public class Insurance {
 	protected int costOfInsurance;
 	protected int age;
 	protected float discount;
 	
+
 	protected ArrayList<Automobile> vehlist ;
 	public  Insurance(){
 		this.vehlist=new ArrayList<Automobile>();
 		
 	}
+
 	protected int getDiscountedCostOfInsurance(AutomobileInterface auto,
 			int pcInsurance) {
 		costOfInsurance = auto.getPrice() * pcInsurance / 100;
@@ -84,6 +87,7 @@ public class Insurance {
 		return costOfInsurance;
 	}
 
+
 	public void addvehicle(Automobile a) {
 		
 		this.vehlist.add(a);
@@ -91,6 +95,7 @@ public class Insurance {
 		
 		
 		
+
 		
 	}
 public void printAllAutomobile(){
