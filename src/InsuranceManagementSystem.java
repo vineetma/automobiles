@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,12 +22,23 @@ public class InsuranceManagementSystem {
 	/**
 	 * @param args
 	 */
+
 	public static void main(String[] args) {
-
 		// TODO Auto-generated method stub
-		Insurance ins = new Insurance();
-		Scanner scan = new Scanner(System.in);
+				Insurance ins = new Insurance();
+				Scanner scan = new Scanner(System.in);
+			
 
+         try {
+			FileOutputStream fileOut = new FileOutputStream("f1.ser");
+			
+			ObjectOutputStream out1 = new ObjectOutputStream(fileOut);
+			   
+		
+			
+		
+         
+		
 		/*
 		 * Automobile auto1 = new Car(5, 200000, 1200); ins.addvehicle(auto1);
 		 * auto1 = new Bike(2,80000,100); ins.addvehicle(auto1); auto1 =new
@@ -36,7 +48,7 @@ public class InsuranceManagementSystem {
 		 * Car(1,100000,1100); ins.addvehicle(auto1); auto1 = new
 		 * Car(3,200000,1000); ins.addvehicle(auto1);
 		 */
-		while (true) {
+		do {
 			System.out.println("Select opion:");
 			System.out.println("1 - Add Automobile");
 			System.out.println("2 - Query");
@@ -84,11 +96,14 @@ public class InsuranceManagementSystem {
 						break;
 					}
 					ins.addvehicle(auto1);
+					
+						out1.writeObject(auto1 );
+					
 					System.out.println("Automobile - "
 							+ auto1.getClass().getName() + " added.");
 					System.out.println("Cost of insurance is: "
 							+ ins.getCostOfInsurance(auto1));
-					File file = new File("c:/users/vineet/documents/test.txt");
+					File file = new File("test.txt");
 					try {
 						FileOutputStream fout = new FileOutputStream(file);
 						fout.write(auto1.toString().getBytes());
@@ -157,7 +172,22 @@ public class InsuranceManagementSystem {
 				return;
 			}
 
-		}
+			
+		} while(scan.hasNext());
+		out1.close();
+		fileOut.close();
+         } catch (FileNotFoundException e1) {
+ 			// TODO Auto-generated catch block
+ 			e1.printStackTrace();
+ 		}
+ 		catch (IOException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 			
+ 		}
+         finally{
+        	 
+         }
 		/*
 		 * try { System.out.println("Insurance cost of auto1 -- " +
 		 * ins.getCostOfInsurance(auto1)); } catch
