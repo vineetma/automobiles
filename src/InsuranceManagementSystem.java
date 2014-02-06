@@ -1,4 +1,9 @@
 
+import java.util.List;
+import java.util.Scanner;
+
+
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -25,6 +30,7 @@ public class InsuranceManagementSystem {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
 				Insurance ins = new Insurance();
 				Scanner scan = new Scanner(System.in);
 			
@@ -39,6 +45,7 @@ public class InsuranceManagementSystem {
 		
          
 		
+
 		/*
 		 * Automobile auto1 = new Car(5, 200000, 1200); ins.addvehicle(auto1);
 		 * auto1 = new Bike(2,80000,100); ins.addvehicle(auto1); auto1 =new
@@ -204,5 +211,4 @@ public class InsuranceManagementSystem {
 	}
 
 }
-
 
