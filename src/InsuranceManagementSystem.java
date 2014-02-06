@@ -1,4 +1,3 @@
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -6,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,6 +28,20 @@ public class InsuranceManagementSystem {
 		// TODO Auto-generated method stub
 		Insurance ins = new Insurance();
 		Scanner scan = new Scanner(System.in);
+		try {
+			FileOutputStream fileOut = new FileOutputStream("f1.ser");
+			try {
+				ObjectOutputStream out = new ObjectOutputStream(fileOut);
+				
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		/*
 		 * Automobile auto1 = new Car(5, 200000, 1200); ins.addvehicle(auto1);
@@ -90,7 +104,7 @@ public class InsuranceManagementSystem {
 							+ auto1.getClass().getName() + " added.");
 					System.out.println("Cost of insurance is: "
 							+ ins.getCostOfInsurance(auto1));
-					File file = new File("c:/users/vineet/documents/test.txt");
+					File file = new File("test.txt");
 					try {
 						FileOutputStream fout = new FileOutputStream(file);
 						fout.write(auto1.toString().getBytes());
@@ -171,4 +185,3 @@ public class InsuranceManagementSystem {
 	}
 
 }
-
