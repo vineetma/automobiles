@@ -1,9 +1,18 @@
 package com.dkt.Automobile;
 
-public abstract class Automobile implements AutomobileInterface {
+import java.io.Serializable;
+
+public abstract class Automobile implements AutomobileInterface, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8609739931372457928L;
 	protected int price;
 	protected int engineCC;
 	protected int age;
+	public Automobile() {
+		
+	}
 	public Automobile(int a, int p,int e){
 		this.age=a;
 		this.price=p;

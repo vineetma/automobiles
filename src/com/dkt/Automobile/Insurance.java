@@ -1,5 +1,7 @@
 package com.dkt.Automobile;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -142,5 +144,17 @@ public void printAllAutomobile(){
 		
 		
 		
+	}
+
+	public void writeObject(ObjectOutputStream out) {
+		// TODO Auto-generated method stub
+		for(Automobile a:vehlist) {
+			try {
+				out.writeObject(a);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

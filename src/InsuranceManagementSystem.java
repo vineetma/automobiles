@@ -1,13 +1,12 @@
-
 import java.util.List;
 import java.util.Scanner;
 
-
-
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Scanner;
@@ -31,30 +30,70 @@ public class InsuranceManagementSystem {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-				Insurance ins = new Insurance();
-				Scanner scan = new Scanner(System.in);
-			
+		Insurance ins = new Insurance();
+		Scanner scan = new Scanner(System.in);
+		boolean fileOutOpen = true;
 
-         try {
-			FileOutputStream fileOut = new FileOutputStream("f1.ser");
-			
-			ObjectOutputStream out1 = new ObjectOutputStream(fileOut);
-			   
-		
-			
-		
-         
-		
+		FileOutputStream fileOut = null;
+		ObjectOutputStream out1 = null;
 
-		/*
-		 * Automobile auto1 = new Car(5, 200000, 1200); ins.addvehicle(auto1);
-		 * auto1 = new Bike(2,80000,100); ins.addvehicle(auto1); auto1 =new
-		 * Truck(3,900000,1600); ins.addvehicle(auto1);
-		 * 
-		 * auto1 = new Car(4,20000,1000); ins.addvehicle(auto1); auto1 = new
-		 * Car(1,100000,1100); ins.addvehicle(auto1); auto1 = new
-		 * Car(3,200000,1000); ins.addvehicle(auto1);
-		 */
+		FileInputStream fileIn = null;
+		ObjectInputStream in = null;
+		boolean fileInOpen = true;
+		try {
+			fileIn = new FileInputStream("f1.ser");
+			in = new ObjectInputStream(fileIn);
+		} catch (FileNotFoundException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+			fileInOpen = false;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fileInOpen = false;
+		}
+		if (fileInOpen) {
+			Automobile auto2 = null;
+			boolean doneWithReading = false;
+			while (!doneWithReading) {
+				try {
+					auto2 = (Automobile) in.readObject();
+					ins.addvehicle(auto2);
+					System.out.println("Added a veihcle: "+auto2.getClass().toString()+","+auto2.getEngineCc());
+				} catch (ClassNotFoundException | IOException e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+					System.out.println("Done with reading");
+					doneWithReading = true;
+				}
+			}
+		}
+
+		if (fileInOpen) {
+			ins.printAllAutomobile();
+			try {
+				in.close();
+				fileIn.close();
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		}
+
+		try {
+			fileOut = new FileOutputStream("f1.ser");
+			out1 = new ObjectOutputStream(fileOut);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			fileOutOpen = false;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fileOutOpen = false;
+		}
+		if (!fileOutOpen)
+			System.out.println("Unable to write..");
 		do {
 			System.out.println("Select opion:");
 			System.out.println("1 - Add Automobile");
@@ -103,24 +142,13 @@ public class InsuranceManagementSystem {
 						break;
 					}
 					ins.addvehicle(auto1);
-					
-						out1.writeObject(auto1 );
-					
+
+
 					System.out.println("Automobile - "
 							+ auto1.getClass().getName() + " added.");
 					System.out.println("Cost of insurance is: "
 							+ ins.getCostOfInsurance(auto1));
-					File file = new File("test.txt");
-					try {
-						FileOutputStream fout = new FileOutputStream(file);
-						fout.write(auto1.toString().getBytes());
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+
 					System.out
 							.println("Do you want to continue. Select one of the following: ");
 					System.out.println("1 - Yes.. Continue Adding Automobiles");
@@ -134,6 +162,8 @@ public class InsuranceManagementSystem {
 						break;
 					}
 					if (userChoice == 3) {
+						if (fileOutOpen) 
+							ins.writeObject(out1);
 						System.out.println("Leaving for now..!! Bye");
 						return;
 					}
@@ -175,26 +205,24 @@ public class InsuranceManagementSystem {
 				ins.printAllAutomobile();
 				break;
 			case 4:
+				if (fileOutOpen) 
+						ins.writeObject(out1);
+
 				System.out.println("Leaving for now..!! Bye");
 				return;
 			}
 
-			
-		} while(scan.hasNext());
-		out1.close();
-		fileOut.close();
-         } catch (FileNotFoundException e1) {
- 			// TODO Auto-generated catch block
- 			e1.printStackTrace();
- 		}
- 		catch (IOException e) {
- 			// TODO Auto-generated catch block
- 			e.printStackTrace();
- 			
- 		}
-         finally{
-        	 
-         }
+		} while (scan.hasNext());
+
+		if (fileOutOpen) {
+			try {
+				out1.close();
+				fileOut.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		/*
 		 * try { System.out.println("Insurance cost of auto1 -- " +
 		 * ins.getCostOfInsurance(auto1)); } catch
@@ -203,12 +231,6 @@ public class InsuranceManagementSystem {
 		 * e.printStackTrace(); }
 		 */
 
-	
-
-
-
-
 	}
 
 }
-
